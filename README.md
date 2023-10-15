@@ -12,3 +12,6 @@ This dataset can also be accessed through [Tensorflow Datasets (TFDS)](https://w
   * Mixed precision is the use of both 16-bit and 32-bit floating-point types in a model during training to make it run faster and use less memory. By keeping certain parts of the model in the 32-bit types for numeric stability, the model will have a lower step time and train equally as well in terms of the evaluation metrics such as accuracy.
 * Used the `Prefetch` feature to cut down on data loading times.
   * Prefetching overlaps the preprocessing and model execution of a training step. While the model is executing training step s, the input pipeline is reading the data for step s+1. Doing so reduces the step time to the maximum (as opposed to the sum) of the training and the time it takes to extract the data.
+* Certain callbacks were also used for better training:
+  * `Early Stopping callback`: Used to stop the training when a monitored metric stops improving after certain iterations.
+  * `Reduce LR on Plateau`: Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity; if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.
