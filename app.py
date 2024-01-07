@@ -2,6 +2,7 @@ import streamlit as st
 import tensorflow as tf
 import pandas as pd
 import altair as alt
+import matplotlib.image as mpimg
 # from utils import load_and_prep, get_classes
 
 @st.cache(suppress_st_warning=True)
@@ -108,7 +109,7 @@ def predicting(image, model):
                 'tuna_tartare',
                 'waffles']
     image=tf.image.resize(image,[224,224])
-    image = tf.cast(tf.expand_dims(image, axis=0), tf.float32)
+    image = tf.cast(tf.expand_dims(image,axis=0),tf.float32)
     preds = model.predict(image)
     pred_class = class_names[tf.argmax(preds[0])]
     pred_conf = tf.reduce_max(preds[0])
@@ -123,61 +124,41 @@ def predicting(image, model):
     df = df.sort_values('F1 Scores')
     return pred_class, pred_conf, df
 
-st.set_page_config(page_title="Food Vision",
+st.set_page_config(layout="wide",
+                   page_title="Food Vision",
                    page_icon="🍔")
 
 #### SideBar ####
 
 st.sidebar.title("What's Food Vision ?")
-st.sidebar.write("""
-FoodVision is an end-to-end **CNN Image Classification Model** which identifies the food in your image. 
-
-It can identify over 100 different food classes
-
-It is based upom a pre-trained Image Classification Model that comes with Keras and then retrained on the infamous **Food101 Dataset**.
-
-**Accuracy :** **`85%`**
-
-**Model :** **`EfficientNetB1`**
-
-**Dataset :** **`Food101`**
-""")
+st.sidebar.write("### Identify what's in your food photos!")
+file = st.sidebar.file_uploader(label="Upload an image of food.",
+                        type=["jpg", "jpeg", "png"])
 
 
 #### Main Body ####
 
 st.title("Food Vision 🍔📷")
-st.header("Identify what's in your food photos!")
-# st.write("To know more about this app, visit [**GitHub**](https://github.com/gauravreddy08/food-vision)")
-file = st.file_uploader(label="Upload an image of food.",
-                        type=["jpg", "jpeg", "png"])
 
+st.write("#### Try uploading a food image to check which food it is:")
 
 model = tf.keras.models.load_model("D:\garvit\code\ml/food vision/tuned_model.h5",compile=False)
-
-# st.sidebar.markdown("Created by **Gaurav Reddy**")
-# st.sidebar.markdown(body="""
-
-# <th style="border:None"><a href="https://twitter.com/gaurxvreddy" target="blank"><img align="center" src="https://bit.ly/3wK17I6" alt="gaurxvreddy" height="40" width="40" /></a></th>
-# <th style="border:None"><a href="https://linkedin.com/in/gauravreddy08" target="blank"><img align="center" src="https://bit.ly/3wCl82U" alt="gauravreddy08" height="40" width="40" /></a></th>
-# <th style="border:None"><a href="https://github.com/gauravreddy08" target="blank"><img align="center" src="https://bit.ly/3c2onZS" alt="16034820" height="40" width="40" /></a></th>
-# <th style="border:None"><a href="https://instagram.com/gaurxv_reddy" target="blank"><img align="center" src="https://bit.ly/3oZABHZ" alt="gaurxv_reddy" height="40" width="40" /></a></th>
-
-# """, unsafe_allow_html=True)
-
+col1, col2 = st.columns(2)
 if not file:
     st.warning("Please upload an image")
     st.stop()
 
 else:
-    image = file.read()
-    st.image(image, use_column_width=True)
+    image = mpimg.imread(file)
+    col1.image(image, use_column_width=True)
     pred_button = st.button("Predict")
+
+if pred_button:
     pred_class, pred_conf, df = predicting(image, model)
-    st.success(f'Prediction : {pred_class} \nConfidence : {pred_conf*100:.2f}%')
-    st.write(alt.Chart(df).mark_bar().encode(
+    col2.success(f'Prediction : {pred_class} \nConfidence : {pred_conf*100:.2f}%')
+    col2.write(alt.Chart(df).mark_bar().encode(
         x='F1 Scores',
         y=alt.X('Top 5 Predictions', sort=None),
         color=alt.Color("color", scale=None),
         text='F1 Scores'
-    ).properties(width=600, height=400))
+    ).properties(width=700, height=500))
