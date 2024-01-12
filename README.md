@@ -15,3 +15,11 @@ This dataset can also be accessed through [Tensorflow Datasets (TFDS)](https://w
 * Certain callbacks were also used for better training:
   * `Early Stopping callback`: Used to stop the training when a monitored metric stops improving after certain iterations and saves the best score weights.
   * `Reduce LR on Plateau`: Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity; if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.
+ 
+## Result:
+* Access the model with 81% accuracy through the given link -->
+  [Tuned model](https://drive.google.com/file/d/1qPCsJqEgYmOoKU1AIaznyeR3OU4uDCzK/view?usp=sharing)
+
+**` How the Prediction App looks like:`**
+![predict1](https://github.com/garvit088/Food_Vision/assets/97309123/50ba4c47-1405-42db-b591-839a1740367f)
+
