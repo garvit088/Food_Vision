@@ -2,7 +2,7 @@
 * A deep learning-based food image recognition model.
 * This project is inspired by the research paper [DeepFood: Deep Learning-Based Food Image Recognition for Computer-Aided Dietary Assessment](https://arxiv.org/abs/1606.05675)
 
-  ![output](https://github.com/garvit088/Food_Vision/assets/97309123/55fd0898-1cf7-497a-9c9f-ad0bf5911d74)
+  ![output1](https://github.com/garvit088/Food_Vision/assets/97309123/e074db93-0b6c-44e0-b948-2728eb832e5b)
  
 
 ## Dataset: [Food 101](https://www.kaggle.com/datasets/dansbecker/food-101)
