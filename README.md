@@ -2,6 +2,9 @@
 * A deep learning-based food image recognition model.
 * This project is inspired by the research paper [DeepFood: Deep Learning-Based Food Image Recognition for Computer-Aided Dietary Assessment](https://arxiv.org/abs/1606.05675)
 
+  ![output](https://github.com/garvit088/Food_Vision/assets/97309123/55fd0898-1cf7-497a-9c9f-ad0bf5911d74)
+ 
+
 ## Dataset: [Food 101](https://www.kaggle.com/datasets/dansbecker/food-101)
 This dataset can also be accessed through [Tensorflow Datasets (TFDS)](https://www.tensorflow.org/datasets/overview)
 >> This dataset consists of 101 food categories with 101,000 images. For each class, 250 manually reviewed test images are provided, as well as 750 training images. On purpose, the training images were not cleaned and thus still contain some amount of noise. This comes mostly in the form of intense colors and sometimes wrong labels. All images were rescaled to have a maximum side length of 512 pixels.
@@ -21,5 +24,7 @@ This dataset can also be accessed through [Tensorflow Datasets (TFDS)](https://w
   [Tuned model](https://drive.google.com/file/d/1qPCsJqEgYmOoKU1AIaznyeR3OU4uDCzK/view?usp=sharing)
 
 **` How the Prediction App looks like:`**
-![predict1](https://github.com/garvit088/Food_Vision/assets/97309123/50ba4c47-1405-42db-b591-839a1740367f)
+
+![pred2](https://github.com/garvit088/Food_Vision/assets/97309123/724063c6-125f-4585-846d-e1bd048eb69d)
+
 
